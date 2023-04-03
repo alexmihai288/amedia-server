@@ -5,7 +5,7 @@ const Unauthenticate = require('../errors/Unauthenticate')
 const register = async (req,res,next)=>{
     try {
         const user = await User.create(req.body)
-        res.status(201).json({msg:'Account succesfully created !'})
+        res.status(201).json({msg:'Account succesfully created !',ok:true})
     } catch (error) {
         next(error)
     }
@@ -31,7 +31,7 @@ const login = async (req,res,next)=>{
         const token = User.createJWT({userId:user._id,username:user.username}) 
 
 
-        res.status(200).json({msg:'Succesfully logged in !',token})
+        res.status(200).json({msg:'Succesfully logged in !',token,ok:true})
     } catch (error) {
         next(error)
     }
