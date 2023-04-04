@@ -11,13 +11,12 @@ const express = require('express')
 const app = express()
 
 //import connectDB
-const  connectDB = require('./db/connectDB')
-
-//import authenticate
+const connectDB = require('./db/connectDB')
 
 
 //import routes
 const authRoute = require('./routes/auth')
+const postsRoute = require('./routes/posts')
 
 //import errors
 const notFoundMiddleware = require('./middlewares/not-found')
@@ -39,6 +38,7 @@ app.use(rateLimit({
 
  //routes
  app.use('/authenticate',authRoute)
+ app.use('/posts',postsRoute)
 
  //errors
  app.use(notFoundMiddleware)

@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:[true,'You must provide a password'],
         minlength:4
+    },
+    photo:{
+        type:String,
+        default:"https://media.discordapp.net/attachments/724220064223592541/1092840802721480804/user.jpg?width=662&height=662"
     }
 })
 
@@ -41,7 +45,7 @@ UserSchema.pre('save',async function(){
 })
 
 UserSchema.statics.createJWT = function(payload){
-    return jwt.sign({userId:payload.userId,username:payload.username},process.env.JWT_ENCRYPTION,{expiresIn:process.env.JWT_LIFETIME})
+    return jwt.sign({userId:payload.userId},process.env.JWT_ENCRYPTION,{expiresIn:process.env.JWT_LIFETIME})
 }
 
 UserSchema.statics.comparePassword = async function(canditatedPass,password) {

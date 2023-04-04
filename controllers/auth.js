@@ -28,7 +28,7 @@ const login = async (req,res,next)=>{
         if(!isPasswordCorrect)
             throw new Unauthenticate('Invalid credentials')
 
-        const token = User.createJWT({userId:user._id,username:user.username}) 
+        const token = User.createJWT({userId:user._id,username:user.username,photo:user.photo}) 
 
 
         res.status(200).json({msg:'Succesfully logged in !',token,ok:true})

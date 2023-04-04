@@ -1,4 +1,5 @@
 const CustomAPIError = require("../errors/CustomAPIError")
+const {JsonWebTokenError} = require('jsonwebtoken')
 
 const errorHandler = (err,req,res,next)=>{
     console.log(err)
@@ -47,6 +48,10 @@ const errorHandler = (err,req,res,next)=>{
         else if(err.errors.password){
             setError(err.errors.password.properties.message,400,false)
         }
+    }
+
+    if(err instanceof JsonWebTokenError){
+        setError('Please login to access this feauture',401,false)
     }
 
 
