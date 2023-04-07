@@ -17,6 +17,7 @@ const connectDB = require('./db/connectDB')
 //import routes
 const authRoute = require('./routes/auth')
 const postsRoute = require('./routes/posts')
+const searchRoute = require('./routes/search')
 
 //import errors
 const notFoundMiddleware = require('./middlewares/not-found')
@@ -39,6 +40,8 @@ app.use(rateLimit({
  //routes
  app.use('/authenticate',authRoute)
  app.use('/posts',postsRoute)
+ app.use('/search',searchRoute)
+
 
  //errors
  app.use(notFoundMiddleware)

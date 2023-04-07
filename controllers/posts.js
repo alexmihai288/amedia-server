@@ -14,7 +14,7 @@ const createPost = async(req,res,next)=>{
     try{
         req.body.createdBy = req.user.userId
         const post = await Post.create(req.body)
-        res.status(201).json({post})
+        res.status(201).json(post)
     }catch(error){
         next(error)
     }
@@ -47,7 +47,7 @@ const updatePost =  async(req,res,next)=>{
         if(!post)
             throw new NotFound(`No job with the id ${postId}`)
     
-        res.status(200).json({post})
+        res.status(200).json(post)
     }
     catch(error)
     {
@@ -64,7 +64,7 @@ const deletePost = async(req,res,next)=>{
         if(!post)
             throw new NotFound(`No post with id ${postId}`)
 
-        res.status(200).json({post})
+        res.status(200).json(post)
     }
     catch(error){
         next(error)
