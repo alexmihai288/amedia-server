@@ -11,7 +11,7 @@ const auth = async (req,res,next)=>{
 
         const token = authHeader.split(' ')[1]
         
-        const payload = await jwt.verify(token,process.env.JWT_ENCRYPTION)
+        const payload = await jwt.verify(token,process.env.JWT_ENCRYPTION);
 
         //atatch the user to to req.user
         req.user = {userId:payload.userId}
