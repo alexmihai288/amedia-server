@@ -10,7 +10,7 @@ const decodeUser = async (req,res,next)=>{
         if(!targetUser)
             throw new NotFound(`Cannot find any user with the id of ${userId}`);
 
-        res.status(200).json(targetUser);
+        res.status(200).json({targetUser,ok:true});
     }catch(err){
         next(err);
     }
