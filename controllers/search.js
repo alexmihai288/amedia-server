@@ -1,5 +1,6 @@
 const NotFound = require('../errors/NotFound')
 const User = require('../models/User')
+const BadRequest = require('../errors/BadRequest')
 
 const createdBy = async(req,res,next)=>{
     try{
@@ -16,4 +17,25 @@ const createdBy = async(req,res,next)=>{
     }
 }
 
-module.exports = {createdBy}
+
+const searchUser = async(req,res,next)=>{
+    try {
+     const {username} = req.query
+
+     if(!username){
+        throw new BadRequest('Please provide a username!')
+    }
+        
+     const user = await User.find({username:{$regex:username,$options:'i'}})
+
+     if(user.length===0)
+            throw new NotFound('No users found !')
+
+    res.status(200).json(user)
+     
+    }catch (error){
+        next(error)
+    }
+}
+
+module.exports = {createdBy,searchUser}
