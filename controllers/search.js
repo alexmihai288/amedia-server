@@ -23,7 +23,7 @@ const searchUser = async(req,res,next)=>{
      const {username} = req.query
 
      if(!username){
-        throw new BadRequest('Please provide an username!')
+        throw new BadRequest('Provide an username!')
     }
         
      const user = await User.find({username:{$regex:username,$options:'i'}})
