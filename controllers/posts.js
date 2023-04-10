@@ -13,8 +13,11 @@ const getAllPosts = async(req,res,next)=>{
 const createPost = async(req,res,next)=>{
     try{
         req.body.createdBy = req.user.userId
+        const {description,imageUrl} = req.body
+        if(!description || !imageUrl)
+            throw new BadRequest('Please fill all the fields !')
         const post = await Post.create(req.body)
-        res.status(201).json(post)
+        res.status(201).json({msg:'Post succesfully created !',ok:true})
     }catch(error){
         next(error)
     }
