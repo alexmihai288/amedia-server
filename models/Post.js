@@ -12,7 +12,20 @@ const PostSchema = new mongoose.Schema({
     createdBy:{
         type:mongoose.Types.ObjectId,
         ref:'User'
-    }
+    },
+    upVotes:[
+        {
+            type:mongoose.Types.ObjectId,
+            ref:'User'
+        }
+    ],
+    downVotes:[
+       { 
+        type:mongoose.Types.ObjectId,
+        ref:'User'
+       }
+        
+    ]
 },{timestamps:true})
 
 module.exports = mongoose.model('Post',PostSchema)

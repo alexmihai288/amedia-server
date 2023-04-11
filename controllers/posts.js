@@ -40,12 +40,27 @@ const getPost = async(req,res,next)=>{
 
 const updatePost =  async(req,res,next)=>{
     try{
-        const {body:{description,imageUrl},user:{userId},params:{id:postId}} = req
+        const {body:{description,imageUrl,upVotes,downVotes},user:{userId},params:{id:postId}} = req
 
-        if(description.trim()==='' || !imageUrl)
-            throw new BadRequest('You must fill all the inputs')
+        const propsObject = {};
+
+        if(description){
+            if(description.trim()==='')
+                throw new BadRequest('You must fill all the inputs')
+            propsObject.description=description
+        }
+        if(imageUrl){
+            if(!imageUrl)
+                throw new BadRequest('You must fill all the inputs')
+            propsObject.imageUrl=imageUrl
+        }
+        if(upVotes)
+            propsObject.upVotes=upVotes
+        if(downVotes)
+            propsObject.downVotes=downVotes
+
     
-        const post = await Post.findByIdAndUpdate({_id:postId,createdBy:userId},req.body,{new:true,runValidators:true})
+        const post = await Post.findByIdAndUpdate({_id:postId,createdBy:userId},propsObject,{new:true,runValidators:true})
     
         if(!post)
             throw new NotFound(`No job with the id ${postId}`)
