@@ -30,7 +30,7 @@ const getPost = async(req,res,next)=>{
         if(!post)
             throw new NotFound(`No post with id ${postId}`) 
 
-        res.status(200).json({post})
+        res.status(200).json({post,ok:true})
     }
     catch(error){
         next(error)
