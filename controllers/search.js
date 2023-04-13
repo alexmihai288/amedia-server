@@ -38,4 +38,21 @@ const searchUser = async(req,res,next)=>{
     }
 }
 
-module.exports = {createdBy,searchUser}
+const decodeByUserId = async(req,res,next)=>{
+    try{
+        const {id} = req.params
+
+        const user = await User.findById({_id:id})
+
+        if(!user)
+            throw new BadRequest(`No user with id:${id}`)
+
+        res.status(200).json({user,ok:true})
+    }
+    catch(error)
+    {
+        next(error)
+    }
+}
+
+module.exports = {createdBy,searchUser,decodeByUserId}

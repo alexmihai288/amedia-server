@@ -25,6 +25,15 @@ const PostSchema = new mongoose.Schema({
         ref:'User'
        }
         
+    ],
+    comments:[
+        {
+            userId:mongoose.Types.ObjectId,
+            comment:{
+                type:String,
+                required:[true,'Please enter your comment']
+            }
+        }
     ]
 },{timestamps:true})
 

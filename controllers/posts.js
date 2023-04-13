@@ -40,7 +40,7 @@ const getPost = async(req,res,next)=>{
 
 const updatePost =  async(req,res,next)=>{
     try{
-        const {body:{description,imageUrl,upVotes,downVotes},user:{userId},params:{id:postId}} = req
+        const {body:{description,imageUrl,upVotes,downVotes,comments},user:{userId},params:{id:postId}} = req
 
         const propsObject = {};
 
@@ -59,7 +59,9 @@ const updatePost =  async(req,res,next)=>{
         if(downVotes)
             propsObject.downVotes=downVotes
 
-    
+        if(comments)
+            propsObject.comments=comments
+
         const post = await Post.findByIdAndUpdate({_id:postId,createdBy:userId},propsObject,{new:true,runValidators:true})
     
         if(!post)
