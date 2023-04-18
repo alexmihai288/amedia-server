@@ -3,6 +3,8 @@ const {JsonWebTokenError} = require('jsonwebtoken')
 
 const errorHandler = (err,req,res,next)=>{
 
+    console.log(err)
+
     let defaultError = {
         msg:'Internal server error',
         statusCode:500,
