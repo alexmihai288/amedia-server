@@ -25,8 +25,8 @@ const createPost = async(req,res,next)=>{
 
 const getPost = async(req,res,next)=>{
     try{
-        const {user:{userId},params:{id:postId}} = req
-        const post = await Post.findOne({_id:postId,createdBy:userId})
+        const {params:{id:postId}} = req
+        const post = await Post.findOne({_id:postId})
         if(!post)
             throw new NotFound(`No post with id ${postId}`) 
 
@@ -65,7 +65,7 @@ const updatePost =  async(req,res,next)=>{
         const post = await Post.findByIdAndUpdate({_id:postId,createdBy:userId},propsObject,{new:true,runValidators:true})
     
         if(!post)
-            throw new NotFound(`No job with the id ${postId}`)
+            throw new NotFound(`No post with the id ${postId}`)
     
         res.status(200).json(post)
     }
