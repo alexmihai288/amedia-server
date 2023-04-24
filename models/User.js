@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema({
         type:String,
         default:"https://media.discordapp.net/attachments/724220064223592541/1092840802721480804/user.jpg?width=662&height=662"
     }
-})
+},{timestamps:true})
 
 UserSchema.pre('save',async function(){
     const salt = await bcrypt.genSalt(10)
