@@ -5,12 +5,14 @@ const NotFound = require('../errors/NotFound');
 const decodeUser = async (req,res,next)=>{
     try{
         const {userId} = req.user;
-        const targetUser = await User.findById({_id:userId}).select('-password');
+        if(userId){
+            const targetUser = await User.findById({_id:userId}).select('-password');
 
         if(!targetUser)
             throw new NotFound(`Cannot find any user with the id of ${userId}`);
 
-        res.status(200).json({targetUser,ok:true});
+            res.status(200).json({targetUser,ok:true});
+    }
     }catch(err){
         next(err);
     }

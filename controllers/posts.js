@@ -10,6 +10,21 @@ const getAllPosts = async(req,res,next)=>{
         next(error)
     }
 }
+
+const getAllPostsByUserId = async(req,res,next)=>{
+    try{
+        const userId = req.params.id
+        const post = await Post.find({createdBy:userId})
+        if(!post){
+            res.status(200).json({msg:"User doesn't have any posts yet !"})
+            return
+        }
+        res.status(200).json({post,count:post.length,ok:true})
+    }catch(error) {
+        next(error)
+    }
+}
+
 const createPost = async(req,res,next)=>{
     try{
         req.body.createdBy = req.user.userId
@@ -93,4 +108,4 @@ const deletePost = async(req,res,next)=>{
 }
 
 
-module.exports = {getAllPosts,createPost,getPost,updatePost,deletePost}
+module.exports = {getAllPosts,getAllPostsByUserId,createPost,getPost,updatePost,deletePost}
