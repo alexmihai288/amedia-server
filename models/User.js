@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema({
     },
     photo:{
         type:String,
-        default:"https://media.discordapp.net/attachments/724220064223592541/1092840802721480804/user.jpg?width=662&height=662"
+        default:"https://cdn.discordapp.com/attachments/724220064223592541/1092840802721480804/user.jpg"
     }
 },{timestamps:true})
 

@@ -37,6 +37,4 @@ const PostSchema = new mongoose.Schema({
     ]
 },{timestamps:true})
 
-
-//dada
 module.exports = mongoose.model('Post',PostSchema)
