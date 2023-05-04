@@ -4,7 +4,6 @@ require('dotenv').config()
 const helmet = require('helmet')
 const cors = require('cors')
 const xss  = require('xss-clean')
-const rateLimit = require('express-rate-limit')
 
 //server
 const express = require('express')
@@ -18,6 +17,7 @@ const connectDB = require('./db/connectDB')
 const authRoute = require('./routes/auth')
 const postsRoute = require('./routes/posts')
 const searchRoute = require('./routes/search')
+const userRoute = require('./routes/user')
 
 //import errors
 const notFoundMiddleware = require('./middlewares/not-found')
@@ -38,7 +38,7 @@ app.set('trust proxy',1)
  app.use('/authenticate',authRoute)
  app.use('/posts',postsRoute)
  app.use('/search',searchRoute)
-
+ app.use('/user',userRoute)
 
  //errors
  app.use(notFoundMiddleware)

@@ -35,7 +35,13 @@ const UserSchema = new mongoose.Schema({
     },
     photo:{
         type:String
-    }
+    },
+    friendsRequest:[
+        {
+            type:mongoose.Types.ObjectId,
+            ref:'User'
+        }
+    ]
 },{timestamps:true})
 
 UserSchema.pre('save',async function(){
